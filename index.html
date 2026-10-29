@@ -1,0 +1,110 @@
+```html
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Tools Urdu</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  color: #172033;
+  text-align: center;
+}
+header {
+  background: #155eef;
+  color: white;
+  padding: 25px 12px;
+}
+header h1 { margin: 0 0 8px; }
+main {
+  max-width: 600px;
+  margin: 25px auto;
+  padding: 15px;
+}
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 3px 12px #00000012;
+}
+input {
+  width: 90%;
+  padding: 13px;
+  margin: 12px 0;
+  border: 1px solid #ccd3df;
+  border-radius: 8px;
+  font-size: 16px;
+}
+button {
+  background: #155eef;
+  color: white;
+  border: 0;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 5px;
+}
+#qrcode { margin: 20px auto; }
+#qrcode img, #qrcode canvas {
+  margin: auto;
+  max-width: 100%;
+}
+footer { padding: 20px; color: #667085; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Smart Tools Urdu</h1>
+  <p>Free Online Tools for Everyone</p>
+</header>
+<main>
+  <div class="card">
+    <h2>QR Code Generator</h2>
+    <p>اپنا نام، لنک یا کوئی بھی تحریر لکھیں</p>
+    <input id="text" type="text" placeholder="یہاں اپنا متن یا لنک لکھیں">
+    <br>
+    <button onclick="makeQR()">QR Code بنائیں</button>
+    <div id="qrcode"></div>
+    <button id="download" onclick="downloadQR()" style="display:none">QR Code ڈاؤن لوڈ کریں</button>
+    <p id="message"></p>
+  </div>
+</main>
+<footer>© 2026 Smart Tools Urdu</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+let qr;
+function makeQR() {
+  const value = document.getElementById('text').value.trim();
+  const box = document.getElementById('qrcode');
+  document.getElementById('message').textContent = '';
+  if (!value) {
+    document.getElementById('message').textContent = 'براہ کرم پہلے کچھ لکھیں۔';
+    return;
+  }
+  if (typeof QRCode === 'undefined') {
+    document.getElementById('message').textContent = 'QR ٹول لوڈ نہیں ہوا۔ انٹرنیٹ چیک کرکے دوبارہ کوشش کریں۔';
+    return;
+  }
+  box.innerHTML = '';
+  qr = new QRCode(box, {text:value, width:220, height:220});
+  document.getElementById('download').style.display = 'inline-block';
+}
+function downloadQR() {
+  const box = document.getElementById('qrcode');
+  const canvas = box.querySelector('canvas');
+  const img = box.querySelector('img');
+  const link = document.createElement('a');
+  link.download = 'smart-tools-qr.png';
+  if (canvas) link.href = canvas.toDataURL('image/png');
+  else if (img) link.href = img.src;
+  else return;
+  link.click();
+}
+</script>
+</body>
+</html>
+```
