@@ -1,137 +1,174 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Tools - Free Online Tools</title>
-<meta name="description" content="Use free online QR code, text and image tools with Smart Tools. Simple, fast and mobile friendly.">
-
+<title>Smart Tools</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f7ff;color:#172033}
-header{background:linear-gradient(120deg,#4338ca,#7c3aed);color:white;padding:28px 18px}
-nav{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.logo{font-size:25px;font-weight:bold}
-nav a{color:white;text-decoration:none;margin-left:15px}
-.hero{text-align:center;padding:45px 15px 35px}
-.hero h1{font-size:36px;margin:0 0 14px}
-.hero p{font-size:17px;line-height:1.6}
-.search{width:100%;max-width:500px;padding:15px;border:0;border-radius:10px;font-size:16px;margin-top:15px}
-main{max-width:1100px;margin:30px auto;padding:0 16px}
-h2{margin-top:35px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-.card{background:white;padding:22px;border-radius:15px;box-shadow:0 4px 18px #18234a12}
-.icon{font-size:35px}
-.card h3{margin:12px 0 8px}
-.card p{color:#647087;line-height:1.5}
-button{border:0;border-radius:8px;background:#4f46e5;color:white;padding:11px 15px;font-size:15px;cursor:pointer}
-button:hover{background:#3730a3}
-input[type=text],textarea{width:100%;padding:12px;border:1px solid #d7dbea;border-radius:8px;margin:8px 0 12px;font-size:16px}
-#qrcode{margin:18px auto;display:flex;justify-content:center;min-height:10px}
-#qrcode img,#qrcode canvas{max-width:100%;height:auto}
-.toolbox{margin-top:30px;background:white;border-radius:15px;padding:22px}
-.note{color:#647087;font-size:14px}
-footer{text-align:center;background:#172033;color:white;padding:25px;margin-top:45px}
-[hidden]{display:none!important}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  color: #222;
+}
+header {
+  background: #075985;
+  color: white;
+  text-align: center;
+  padding: 25px 10px;
+}
+header h1 { margin: 0; }
+.container {
+  max-width: 650px;
+  margin: 20px auto;
+  padding: 12px;
+}
+.tool {
+  background: white;
+  padding: 20px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #ddd;
+}
+h2 { color: #075985; font-size: 20px; }
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #bbb;
+  border-radius: 7px;
+  font-size: 16px;
+}
+button {
+  background: #0284c7;
+  color: white;
+  border: 0;
+  padding: 12px 18px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 8px;
+}
+button:hover { background: #0369a1; }
+#qrcode { margin-top: 15px; }
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #555;
+}
 </style>
 </head>
-
 <body>
+
 <header>
-<nav>
-<div class="logo">⚡ Smart Tools</div>
-<div><a href="#tools">All Tools</a><a href="#qr">QR Generator</a></div>
-</nav>
-<section class="hero">
-<h1>Free Online Tools for Everyone</h1>
-<p>Simple, fast and useful tools for your everyday tasks.</p>
-<input class="search" id="search" type="text" placeholder="Search tools..." oninput="searchTools()">
-</section>
+<h1>Smart Tools</h1>
+<p>Free Online Tools For Everyone</p>
 </header>
 
-<main id="tools">
-<h2>Explore Our Tools</h2>
-<div class="grid" id="toolGrid">
+<div class="container">
 
-<div class="card" data-name="qr code generator">
-<div class="icon">📱</div><h3>QR Code Generator</h3>
-<p>Create a QR code from text, a phone number or a website link.</p>
-<button onclick="document.getElementById('qr').scrollIntoView({behavior:'smooth'})">Use Tool</button>
-</div>
-
-<div class="card" data-name="word counter character counter text tools">
-<div class="icon">📝</div><h3>Word Counter</h3>
-<p>Count words and characters in your text instantly.</p>
-<button onclick="document.getElementById('textTool').scrollIntoView({behavior:'smooth'})">Use Tool</button>
-</div>
-
-<div class="card" data-name="image tools image resize compressor">
-<div class="icon">🖼️</div><h3>Image Tools</h3>
-<p>More image editing and compression tools are coming soon.</p>
-<button onclick="alert('More image tools are coming soon!')">Coming Soon</button>
-</div>
-
-<div class="card" data-name="pdf tools merge split convert pdf to word">
-<div class="icon">📄</div><h3>PDF Tools</h3>
-<p>PDF merging, splitting and conversion tools are planned.</p>
-<button onclick="alert('More PDF tools are coming soon!')">Coming Soon</button>
-</div>
-
-</div>
-
-<section class="toolbox" id="qr">
-<h2>📱 QR Code Generator</h2>
-<p>Enter any text, phone number or website address.</p>
-<input type="text" id="qrInput" placeholder="Enter text or website link">
+<div class="tool">
+<h2>1. QR Code Generator</h2>
+<input id="qrtext" placeholder="Enter link or text">
 <button onclick="makeQR()">Generate QR Code</button>
-<button onclick="downloadQR()">Download QR</button>
 <div id="qrcode"></div>
-<p class="note">Tip: Check your QR code before sharing it.</p>
-</section>
+</div>
 
-<section class="toolbox" id="textTool">
-<h2>📝 Word Counter</h2>
-<textarea id="textInput" rows="5" placeholder="Type or paste your text here..." oninput="countText()"></textarea>
-<p>Words: <strong id="words">0</strong> &nbsp; Characters: <strong id="chars">0</strong></p>
-</section>
-</main>
+<div class="tool">
+<h2>2. WhatsApp Direct Chat</h2>
+<input id="phone" placeholder="Enter number with country code">
+<button onclick="openWhatsApp()">Open WhatsApp Chat</button>
+</div>
+
+<div class="tool">
+<h2>3. Text To Speech</h2>
+<textarea id="speechtext" placeholder="Write your text here"></textarea>
+<button onclick="speakText()">Speak Text</button>
+<button onclick="stopSpeech()">Stop Voice</button>
+</div>
+
+<div class="tool">
+<h2>4. Password Generator</h2>
+<input id="password" placeholder="Your password will appear here" readonly>
+<button onclick="generatePassword()">Generate Password</button>
+<button onclick="copyPassword()">Copy Password</button>
+</div>
+
+</div>
 
 <footer>
-<p>© 2026 Smart Tools. Simple tools for everyday life.</p>
-<p>Fast • Easy • Mobile Friendly</p>
+<p>© 2026 Smart Tools | All Rights Reserved</p>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <script>
-let qr;
-function makeQR(){
- const value=document.getElementById('qrInput').value.trim();
- if(!value){alert('Please enter some text first.');return;}
- if(typeof QRCode==='undefined'){alert('QR tool could not load. Please check your internet and try again.');return;}
- const box=document.getElementById('qrcode');
- box.innerHTML='';
- qr=new QRCode(box,{text:value,width:200,height:200,colorDark:'#111827',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.H});
+function makeQR() {
+  let value = document.getElementById("qrtext").value.trim();
+  if (!value) {
+    alert("Please enter text or link");
+    return;
+  }
+  let box = document.getElementById("qrcode");
+  box.innerHTML = "";
+  if (typeof QRCode === "undefined") {
+    alert("QR library load nahi hui. Internet check karein.");
+    return;
+  }
+  new QRCode(box, {
+    text: value,
+    width: 180,
+    height: 180
+  });
 }
-function downloadQR(){
- const box=document.getElementById('qrcode');
- const canvas=box.querySelector('canvas');
- const img=box.querySelector('img');
- let url=canvas?canvas.toDataURL('image/png'):(img?img.src:'');
- if(!url){alert('Please generate a QR code first.');return;}
- const a=document.createElement('a');
- a.href=url;a.download='smart-tools-qr.png';a.click();
+
+function openWhatsApp() {
+  let number = document.getElementById("phone").value.replace(/\D/g, "");
+  if (!number) {
+    alert("Please enter WhatsApp number with country code");
+    return;
+  }
+  window.open("https://wa.me/" + number, "_blank");
 }
-function countText(){
- const t=document.getElementById('textInput').value;
- document.getElementById('chars').textContent=t.length;
- document.getElementById('words').textContent=t.trim()?t.trim().split(/\s+/).length:0;
+
+function speakText() {
+  let text = document.getElementById("speechtext").value;
+  if (!text.trim()) {
+    alert("Please write something");
+    return;
+  }
+  let speech = new SpeechSynthesisUtterance(text);
+  speechSynthesis.speak(speech);
 }
-function searchTools(){
- const q=document.getElementById('search').value.toLowerCase();
- document.querySelectorAll('#toolGrid .card').forEach(card=>{
- card.hidden=!card.dataset.name.includes(q);
- });
+
+function stopSpeech() {
+  speechSynthesis.cancel();
+}
+
+function generatePassword() {
+  let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%";
+  let pass = "";
+  let random = new Uint32Array(14);
+  crypto.getRandomValues(random);
+  for (let i = 0; i < 14; i++) {
+    pass += chars[random[i] % chars.length];
+  }
+  document.getElementById("password").value = pass;
+}
+
+function copyPassword() {
+  let pass = document.getElementById("password").value;
+  if (!pass) {
+    alert("Generate password first");
+    return;
+  }
+  navigator.clipboard.writeText(pass)
+    .then(() => alert("Password copied"))
+    .catch(() => alert("Please copy password manually"));
 }
 </script>
+
 </body>
 </html>
